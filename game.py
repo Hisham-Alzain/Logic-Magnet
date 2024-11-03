@@ -1,7 +1,7 @@
 from Magnet import Magnet
 from Magnet import Node
 from Board import Board
-
+from Algorithms import Algorithms
 
 def play(level):
     end_game = False
@@ -20,7 +20,7 @@ def play(level):
     if level.isGoal():
         level.display_board()
         print("Congratulations! You have solved the puzzle.")
-    if level.no_moves==0:
+    elif level.no_moves==0:
         level.display_board()
         print("Game over! You ran out of moves.")
 
@@ -279,4 +279,7 @@ def get_level():
 
 
 level = get_level()
-play(level)
+# play(level)
+algorithms =Algorithms()
+queue=[]
+algorithms.BFS(level,queue)

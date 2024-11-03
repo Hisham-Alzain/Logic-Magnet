@@ -1,5 +1,11 @@
 class Board:
 
+    def __init__(self):
+        self.n = 0
+        self.no_moves =0
+        self.whites=[]
+        self.grid = [["-" for _ in range(n)] for _ in range(n)]
+
     def __init__(self, n, magnets, whites, no_moves):
         self.n = n
         self.no_moves = no_moves
@@ -17,6 +23,7 @@ class Board:
                 self.grid[magnet.pos_x][magnet.pos_y] = "G"
 
     def display_board(self):
+        print("Number of moves remained:" , self.no_moves)
         for i in range(self.n):
             for j in range(self.n):
                 print(self.grid[i][j] + " ", end="")
@@ -92,6 +99,7 @@ class Board:
                             self.grid[magnet[0]][y_next] = "*"
                         else:
                             self.grid[magnet[0]][y_next] = "-"
+
             elif magnet[0] < x_next:
                 if self.isIngrid(magnet[0] - 1, y_next):
                     if self.grid[magnet[0] - 1][y_next] in ["-", "*"]:
@@ -100,6 +108,7 @@ class Board:
                             self.grid[magnet[0]][y_next] = "*"
                         else:
                             self.grid[magnet[0]][y_next] = "-"
+
             if magnet[1] > y_next:
                 if self.isIngrid(x_next, magnet[1] + 1):
                     if self.grid[x_next][magnet[1] + 1] in ["-", "*"]:
@@ -108,6 +117,7 @@ class Board:
                             self.grid[x_next][magnet[1]] = "*"
                         else:
                             self.grid[x_next][magnet[1]] = "-"
+
             elif magnet[1] < y_next:
                 if self.isIngrid(x_next, magnet[1] - 1):
                     if self.grid[x_next][magnet[1] - 1] in ["-", "*"]:
@@ -126,6 +136,7 @@ class Board:
                             y_next
                         ]
                         self.grid[magnet[0]][y_next] = "-"
+
             elif magnet[0] < x_next:
                 if self.isIngrid(magnet[0] + 1, y_next):
                     if self.grid[magnet[0] + 1][y_next] in ["-", "*"]:
@@ -133,6 +144,7 @@ class Board:
                             y_next
                         ]
                         self.grid[magnet[0]][y_next] = "-"
+
             if magnet[1] > y_next:
                 if self.isIngrid(x_next, magnet[1] - 1):
                     if self.grid[x_next][magnet[1] - 1] in ["-", "*"]:
@@ -140,6 +152,7 @@ class Board:
                             magnet[1]
                         ]
                         self.grid[x_next][magnet[1]] = "-"
+
             elif magnet[1] < y_next:
                 if self.isIngrid(x_next, magnet[1] + 1):
                     if self.grid[x_next][magnet[1] + 1] in ["-", "*"]:
