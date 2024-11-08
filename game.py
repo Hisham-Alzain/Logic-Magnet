@@ -30,7 +30,7 @@ def get_level_configuration():
 
     levels = {
         1: {
-            "row": 4,
+            "row": 3,
             "col": 4,
             "purplePieces": [(2, 0)],
             "redPieces": [],
@@ -48,7 +48,7 @@ def get_level_configuration():
             "no_moves": 1,
         },
         3: {
-            "row": 4,
+            "row": 3,
             "col": 4,
             "purplePieces": [(2, 0)],
             "redPieces": [],
@@ -58,7 +58,7 @@ def get_level_configuration():
         },
         4: {
             "row": 5,
-            "col": 5,
+            "col": 3,
             "purplePieces": [(2, 0)],
             "redPieces": [],
             "whitePieces": [(0, 0), (0, 2), (4, 1)],
@@ -67,7 +67,7 @@ def get_level_configuration():
         },
         5: {
             "row": 4,
-            "col": 4,
+            "col": 3,
             "purplePieces": [(3, 1)],
             "redPieces": [],
             "whitePieces": [(0, 0), (1, 0), (3, 0), (0, 2), (1, 2)],
@@ -75,7 +75,7 @@ def get_level_configuration():
             "no_moves": 2,
         },
         6: {
-            "row": 5,
+            "row": 3,
             "col": 5,
             "purplePieces": [(2, 0)],
             "redPieces": [],
@@ -85,7 +85,7 @@ def get_level_configuration():
         },
         7: {
             "row": 5,
-            "col": 5,
+            "col": 4,
             "purplePieces": [(2, 1)],
             "redPieces": [],
             "whitePieces": [(0, 0), (1, 0), (2, 3), (3, 2), (4, 3)],
@@ -93,7 +93,7 @@ def get_level_configuration():
             "no_moves": 2,
         },
         8: {
-            "row": 4,
+            "row": 3,
             "col": 4,
             "purplePieces": [(2, 0)],
             "redPieces": [],
@@ -102,7 +102,7 @@ def get_level_configuration():
             "no_moves": 2,
         },
         9: {
-            "row": 7,
+            "row": 1,
             "col": 7,
             "purplePieces": [(0, 0)],
             "redPieces": [],
@@ -120,7 +120,7 @@ def get_level_configuration():
             "no_moves": 2,
         },
         11: {
-            "row": 5,
+            "row": 2,
             "col": 5,
             "purplePieces": [],
             "redPieces": [(1, 2)],
@@ -130,7 +130,7 @@ def get_level_configuration():
         },
         12: {
             "row": 5,
-            "col": 5,
+            "col": 4,
             "purplePieces": [],
             "redPieces": [(3, 1)],
             "whitePieces": [(1, 0), (2, 0), (4, 0), (4, 2)],
@@ -138,7 +138,7 @@ def get_level_configuration():
             "no_moves": 1,
         },
         13: {
-            "row": 6,
+            "row": 3,
             "col": 6,
             "purplePieces": [],
             "redPieces": [(2, 3)],
@@ -156,7 +156,7 @@ def get_level_configuration():
             "no_moves": 2,
         },
         15: {
-            "row": 5,
+            "row": 3,
             "col": 5,
             "purplePieces": [(1, 2)],
             "redPieces": [(2, 2)],
@@ -183,7 +183,7 @@ def get_level_configuration():
             "no_moves": 2,
         },
         18: {
-            "row": 6,
+            "row": 5,
             "col": 6,
             "purplePieces": [(4, 3)],
             "redPieces": [(4, 2)],
@@ -202,7 +202,7 @@ def get_level_configuration():
         },
         20: {
             "row": 5,
-            "col": 5,
+            "col": 4,
             "purplePieces": [(4, 2)],
             "redPieces": [(4, 3)],
             "whitePieces": [(0, 1), (0, 3), (1, 0), (2, 0), (3, 0)],
@@ -210,7 +210,7 @@ def get_level_configuration():
             "no_moves": 2,
         },
         21: {
-            "row": 4,
+            "row": 3,
             "col": 4,
             "purplePieces": [(2, 0)],
             "redPieces": [(2, 3)],
@@ -219,7 +219,7 @@ def get_level_configuration():
             "no_moves": 2,
         },
         22: {
-            "row": 5,
+            "row": 4,
             "col": 5,
             "purplePieces": [(0, 0)],
             "redPieces": [(3, 2)],
@@ -228,7 +228,7 @@ def get_level_configuration():
             "no_moves": 3,
         },
         23: {
-            "row": 5,
+            "row": 4,
             "col": 5,
             "purplePieces": [(3, 4)],
             "redPieces": [(3, 2)],
@@ -247,7 +247,7 @@ def get_level_configuration():
         },
         25: {
             "row": 5,
-            "col": 5,
+            "col": 4,
             "purplePieces": [(4, 0)],
             "redPieces": [(0, 3)],
             "whitePieces": [(0, 0), (0, 3), (2, 0), (4, 0), (4, 1), (4, 2)],
@@ -274,7 +274,7 @@ def get_level():
     whites = [Node(w[0], w[1]) for w in level_config["whitePieces"]]
 
     # Initialize the board
-    level = Board(level_config["row"], magnets, whites, level_config["no_moves"])
+    level = Board(level_config["row"],level_config["col"], magnets, whites, level_config["no_moves"])
     return level
 
 

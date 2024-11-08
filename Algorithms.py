@@ -10,10 +10,10 @@ class Algorithms:
             print("Goal!!")
             return
         for i in range(board.n):
-            for j in range(board.n):
+            for j in range(board.m):
                 if board.grid[i][j] in ['P','R']:
                     for k in  range(board.n):
-                        for l in range(board.n):
+                        for l in range(board.m):
                             tempBoard=Board
                             tempBoard=deepcopy(board)
                             if tempBoard.grid[k][l] not in ['G','R','P']:
@@ -30,10 +30,10 @@ class Algorithms:
             print("Goal!!")
             return
         for i in range(board.n):
-            for j in range(board.n):
+            for j in range(board.m):
                 if board.grid[i][j] in ['P','R']:
                     for k in  range(board.n):
-                        for l in range(board.n):
+                        for l in range(board.m):
                             tempBoard=Board
                             tempBoard=deepcopy(board)
                             if tempBoard.grid[k][l] not in ['G','R','P']:
