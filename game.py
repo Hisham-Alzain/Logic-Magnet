@@ -282,4 +282,5 @@ level = get_level()
 # play(level)
 algorithms =Algorithms()
 queue=[]
-algorithms.BFS(level,queue)
+path=[]
+algorithms.UCS(level,queue)

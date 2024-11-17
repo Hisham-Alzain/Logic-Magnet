@@ -1,10 +1,13 @@
+from copy import deepcopy
 class Board:
-    def __init__(self, n=0, m=0, magnets=None, whites=None, no_moves=0):
+    def __init__(self, n=0, m=0, magnets=None, whites=None, no_moves=0,cost=0,path=[]):
         self.n = n
         self.m = m
         self.no_moves = no_moves
         self.whites = []
         self.grid = [["-" for _ in range(m)] for _ in range(n)]
+        self.cost = cost
+        self.path = path
 
         if whites is None:
             whites = []
@@ -48,9 +51,13 @@ class Board:
             for j in range(self.m):
                 if self.grid[i][j] == "*":
                     return False
+        tempBoard=deepcopy(self)
+        self.path.append(tempBoard)
         return True
 
     def move_magnet(self, x_prev, y_prev, x_next, y_next):
+        tempBoard=deepcopy(self)
+        self.path.append(tempBoard)
         if not self.isIngrid(x_prev, y_prev) or not self.isIngrid(x_next, y_next):
             print("out of bound")
             return
