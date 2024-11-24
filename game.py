@@ -282,5 +282,14 @@ level = get_level()
 # play(level)
 algorithms =Algorithms()
 queue=[]
-path=[]
-algorithms.UCS(level,queue)
+algorithm = int(input("Choose 1 for BFS, 2 for DFS, 3 for UCS, 4 for Hill Climbing: "))
+def invalid_choice(level, queue):
+    print("Invalid choice. Please select a valid algorithm.")
+switch = {
+    1: lambda level, queue: algorithms.BFS(level, queue),
+    2: lambda level, queue: algorithms.DFS(level, queue),
+    3: lambda level, queue: algorithms.UCS(level, queue),
+    4: lambda level, queue: algorithms.Hill_Climbing(level)
+}
+# Call the appropriate function based on user input
+switch.get(algorithm, invalid_choice)(level, queue)
