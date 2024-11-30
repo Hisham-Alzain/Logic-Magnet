@@ -1,7 +1,7 @@
 from copy import deepcopy
 from Board import Board
 import math
-
+import heapq
 
 class Algorithms:
     def __init__(self):
@@ -132,7 +132,6 @@ class Algorithms:
                                 heuristic_value = self.Heuristic_function(tempBoard)
                                 Heuristic.append((i, j, k, l, heuristic_value))
         if Heuristic:
-            print(Heuristic)
             min_i, min_j, min_k, min_l, min_heuristic = min(
                 Heuristic, key=lambda x: x[4]
             )
@@ -146,40 +145,30 @@ class Algorithms:
                 print(f"best heuristic cost is {self.Heuristic_function(board)}")
                 board.display_board()
     def A_Star(self,board):
-        if board.isGoal():
-            print("Goal!!")
-            print("The path is:")
-            for path in board.path:
-                path.display_board()
-            return
-        Heuristic = []
-        for i in range(board.n):
-            for j in range(board.m):
-                if board.grid[i][j] in ["P", "R"]:
-                    for k in range(board.n):
-                        for l in range(board.m):
-                            tempBoard = Board
-                            tempBoard = deepcopy(board)
-                            if tempBoard.grid[k][l] not in ["G", "R", "P"]:
-                                tempBoard.move_magnet(i, j, k, l)
-                                tempBoard.cost += 1
-                                heuristic_value = self.Heuristic_function(tempBoard)
-                                Heuristic.append((i, j, k, l, heuristic_value))
-        if Heuristic:
-            min_i=0; min_j=0; min_k=0; min_l=0; min_cost=board.cost+self.Heuristic_function(board)
-            for h in Heuristic:
-                tempBoard = Board
-                tempBoard = deepcopy(board)
-                tempBoard.move_magnet(h[0], h[1], h[2], h[3])
-                if tempBoard.cost+ h[4]<min_cost:
-                    min_i=h[0]; min_j=h[1]; min_k=h[2]; min_l=h[3]; min_cost=tempBoard.cost+h[4]
-            if min_cost < self.Heuristic_function(board)+board.cost:
-                tempBoard = Board
-                tempBoard = deepcopy(board)
-                tempBoard.move_magnet(min_i, min_j, min_k, min_l)
-                tempBoard.display_board()
-                self.A_Star(tempBoard)
-            else:
-                print("No valid solution found")
-                print(f"best cost is {self.Heuristic_function(board)+board.cost}")
-                board.display_board()
+        queue = []
+        heapq.heappush(queue, (board.cost + self.Heuristic_function(board), board))
+        while queue:
+            _, current_board = heapq.heappop(queue)
+            current_board.display_board()
+            if current_board.isGoal():
+                print("Goal!!")
+                print("The path is:")
+                for path in current_board.path:
+                    path.display_board()
+                return
+            if current_board in self.visited:
+                continue
+            self.visited.append(current_board)
+            for i in range(board.n):
+                for j in range(board.m):
+                    if current_board.grid[i][j] in ["P", "R"]:
+                        for k in range(board.n):
+                            for l in range(board.m):
+                                tempBoard = Board
+                                tempBoard = deepcopy(current_board)
+                                if tempBoard.grid[k][l] not in ["G", "R", "P"]:
+                                    tempBoard.move_magnet(i, j, k, l)
+                                    tempBoard.cost += 1
+                                    if tempBoard not in self.visited:
+                                        heuristic_value = self.Heuristic_function(tempBoard)
+                                        heapq.heappush(queue, (tempBoard.cost + heuristic_value, tempBoard))

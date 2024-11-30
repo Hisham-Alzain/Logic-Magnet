@@ -26,6 +26,9 @@ class Board:
             elif magnet.color == "gray":
                 self.grid[magnet.pos_x][magnet.pos_y] = "G"
 
+    def __lt__(self, other):
+        return self.cost < other.cost
+
     def __eq__(self,other):
         if self.n != other.n or self.m != other.m:
             return False
@@ -98,7 +101,7 @@ class Board:
                 self.grid[x_next][y_next] = "P"
                 self.no_moves -= 1
                 magnets = []
-                for i in range(self.n):
+                for i in range(self.n-1,-1,-1):
                     if self.grid[i][y_next] in ["G", "R"]:
                         magnets.append((i, y_next))
                 for i in range(self.m):
@@ -109,7 +112,8 @@ class Board:
                 print("illegal move")
 
     def purple_moves(self, magnets, x_next, y_next):
-        for magnet in magnets:
+        while magnets:
+            magnet=magnets.pop()
             if magnet[0] > x_next:
                 if self.isIngrid(magnet[0] + 1, y_next):
                     if self.grid[magnet[0] + 1][y_next] in ["-", "*"]:
